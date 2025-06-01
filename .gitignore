@@ -1,0 +1,12 @@
+# Virtual env
+.venv/
+
+# Bytecode and cache
+__pycache__/
+*.py[cod]
+
+# SQLite database
+db.sqlite3
+
+# PyCharm project settings
+.idea/
