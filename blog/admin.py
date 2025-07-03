@@ -20,7 +20,7 @@ class PostAdmin(admin.ModelAdmin):
 
     list_filter = ('status', 'topics')  #  Filters results by status and topics
 
-    ordering = ['created']  # Posts sorted by date created, oldest first
+    ordering = ['-created']  # Posts sorted by date created, newest first
 
     prepopulated_fields = {'slug': ('title',)}   # Automates generation of slugs
 

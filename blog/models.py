@@ -29,7 +29,7 @@ class Post(models.Model):
         blank=False,
     )
 
-    #  Timestamp automatically set on create
+    #  Timestamp automatically set when created
     created = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
     #  Timestamp updated each time the object is saved
@@ -64,7 +64,7 @@ class Post(models.Model):
 
     #  Sets default ordering for Post objects
     class Meta:
-        ordering = ['created']  # Posts sorted by date created, oldest first
+        ordering = ['-created']  # Posts sorted by date created, newest first
 
     #  Post's title appears in list view rather than auto-generated string
     def __str__(self):
@@ -76,7 +76,12 @@ class Topic(models.Model):
     """
 
     #  Topic's name
-    name = models.CharField(max_length=255, null=False, blank=False, unique=True)
+    name = models.CharField(
+        max_length=255,
+        null=False,
+        blank=False,
+        unique=True,
+    )
 
     slug = models.SlugField(
         null=False,
@@ -93,8 +98,46 @@ class Comment(models.Model):
     """
     Represents a comment on a Post
     """
+
+    #  Relationship to Post model
     post = models.ForeignKey(
         Post,
         related_name='comments',
-        on_delete=models.PROTECT
+        on_delete=models.PROTECT,
+        null=False,
+        blank=False,
     )
+
+    #  Name of the person commenting
+    name = models.CharField(
+        max_length=50,
+        null=False,
+        blank=False,
+    )
+
+    #  Commenter's email address
+    email = models.EmailField(null=False,blank=False)
+
+    #  Field for the actual comment
+    text = models.TextField(
+        null=False,
+        blank=False,
+        max_length=255,
+    )
+
+    #  For comment moderation
+    approved = models.BooleanField(default=False, blank=True)
+
+    #  Timestamp automatically set when created
+    created = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+
+    #  Timestamp updated each time the object is saved
+    updated = models.DateTimeField(auto_now=True, null=True, blank=True)
+
+    #  Sets default ordering for Comments
+    class Meta:
+        ordering = ['-created']  # Comments sorted by date created, newest first
+
+    #  Comment displayed rather than auto-generated string
+    def __str__(self):
+        return self.text[:30]  #  Returns first 30 characters
