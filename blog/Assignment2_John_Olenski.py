@@ -77,8 +77,6 @@ def question_8_set_approved_to_false(comment):
     comment.approved=False
     comment.save()  #  Saves change to the database
 
-
-
 def question_9_delete_post_and_all_related_comments(post):
     """
     Delete the post object provided, and all related comments.

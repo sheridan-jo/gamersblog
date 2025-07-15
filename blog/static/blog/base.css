@@ -1,0 +1,73 @@
+/* Custom stylesheet for The Gamers' Blog */
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+    background: #111111;
+    color: #fdf6e3;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    padding-top: 70px;
+}
+
+/* Makes flex container take up all available space,
+pushing other elements like footer to the bottom */
+.container {
+    flex: 1;
+}
+
+p {
+    font-size: 20px;
+}
+
+/* Navbar */
+
+.navbar.fixed-top {
+  background-color: #111111;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.navbar-brand img {
+  height: 30px;
+  width: auto;
+}
+
+.navbar-nav .nav-item .nav-link:hover {
+    font-weight: bold;
+}
+
+/* Header Section */
+.header {
+  position: relative;
+  background-image: url('images/controller.jpg'); /*  https://www.pexels.com/photo/black-gaming-console-194511/ */
+  background-size: cover;
+  background-position: center;
+  height: 300px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1rem;
+  overflow: hidden;
+}
+
+.header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* darkness level */
+  z-index: 0;
+}
+
+.header .container {
+  position: relative;
+  z-index: 1;
+}
+

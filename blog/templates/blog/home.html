@@ -1,0 +1,31 @@
+{% extends "blog/base.html" %}
+
+{% block page_title %}Home{% endblock %}
+
+{% block main %}
+    <!-- Header -->
+    <header>
+        <div class="header my-5">
+            <div class="container text-center d-flex align-items-center justify-content-center h-100">
+            <h1 class="text-white">Welcome to The Gamers' Blog</h1>
+        </div>
+    </div>
+    </header>
+        <div class="row">
+            <!-- Homepage's main content -->
+            <div class="col-md-9">
+                <p>Welcome to the home page of my blog!</p>
+            </div>
+
+            <!-- Sidebar listing topics ordered by most popular -->
+            <div class="col-md-3">
+                <h2>Popular topics</h2>
+                <ul>
+                {% for topic in topics_list %}
+                    <li>{{ topic }} ({{ topic.post_count}})</li>
+                {% endfor %}
+                </ul>
+            </div>
+        </div>
+        
+{% endblock %}
