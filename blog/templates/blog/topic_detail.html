@@ -1,0 +1,23 @@
+{% extends "blog/base.html" %}
+{# Page name is whatever the topic name is #}
+{% block page_title %}{{ topic.name }}{% endblock %}
+
+{% block main %}
+<h1>Posts for <em>{{ topic.name }}</em></h1>
+
+{# Renders a list of posts filtered by the topic #}
+{% for post in posts %}
+<h2>{{ post.title }}</h2>
+<p>
+    Published <time>{{ post.published }} </time>
+    <br>
+    by <em>{{ post.author.username }}</em>
+</p>
+<p>{{ post.content|truncatewords:30 }}</p>
+<p><a href="{{ post.get_absolute_url }}">Read more...</a></p>
+
+{# Message if there are no published posts for a topic #}
+{% empty %}
+<p>No published posts found for this topic.</p>
+{% endfor %}
+{% endblock %}

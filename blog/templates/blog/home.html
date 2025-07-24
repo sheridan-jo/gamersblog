@@ -3,29 +3,53 @@
 {% block page_title %}Home{% endblock %}
 
 {% block main %}
-    <!-- Header -->
-    <header>
-        <div class="header my-5">
-            <div class="container text-center d-flex align-items-center justify-content-center h-100">
+<!-- Header -->
+<header>
+    <div class="header my-5">
+        <div class="container text-center d-flex align-items-center justify-content-center h-100">
             <h1 class="text-white">Welcome to The Gamers' Blog</h1>
         </div>
     </div>
-    </header>
-        <div class="row">
-            <!-- Homepage's main content -->
-            <div class="col-md-9">
-                <p>Welcome to the home page of my blog!</p>
-            </div>
-
-            <!-- Sidebar listing topics ordered by most popular -->
-            <div class="col-md-3">
-                <h2>Popular topics</h2>
-                <ul>
-                {% for topic in topics_list %}
-                    <li>{{ topic }} ({{ topic.post_count}})</li>
+</header>
+<div class="row">
+    <!-- Homepage's main content -->
+    <div class="col-md-9">
+        <p>Welcome to the home page of my blog!</p>
+        <h2>Latest Posts</h2>
+        <br>
+        {# Renders 3 most recent posts, including title, publication date and time, author, topics, and content #}
+        {% for post in latest_posts %}
+        <a href="{{ post.get_absolute_url }}"><h3>{{ post.title }}</h3></a>
+            <br>
+            Published <time>{{ post.published }}</time>
+            <br>
+            by <i>{{ post.author.username }}</i>
+            <p>
+                {# Nested for loop which renders each post's topic #}
+                {% for topic in post.topics.all %}
+                {{ topic.name }}{% if not forloop.last %}, {% endif %} {# Ensures no comma on last topic rendered #}
                 {% endfor %}
-                </ul>
-            </div>
-        </div>
-        
+            </p>
+            <p>{{ post.content|truncatewords:20 }}</p>
+            <p><a href="{{ post.get_absolute_url }}">Read more...</a></p>
+        {% endfor %}
+
+    </div>
+
+    <!-- Sidebar listing topics ordered by most popular -->
+    <div class="col-md-3">
+        <h2>Popular topics</h2>
+        <ul>
+            {# Renders the 10 most popular topics #}
+            {% for topic in topics_list %}
+            <li>
+                <a href="{{ topic.get_absolute_url }}">{{ topic.name }}</a> ({{ topic.post_count }})
+            </li>
+            {% endfor %}
+            <br>
+            <a href="{% url 'topic-list' %}">View all topics</a>
+        </ul>
+    </div>
+</div>
+
 {% endblock %}

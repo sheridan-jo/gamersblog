@@ -1,0 +1,14 @@
+{% extends "blog/base.html" %}
+{% block page_title %}Posts{% endblock %}
+
+{% block main %}
+<h1>Published Posts</h1>
+<br>
+{% for post in posts %}
+<h2>{{ post.title }}</h2>
+<p>Published <time>{{ post.published }}</time></p>
+<p>By {{ post.author.username }}</p>
+<p>{{ post.content }}</p>
+{% endfor %}
+
+{% endblock %}

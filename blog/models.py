@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.urls import reverse
 
 #  Create your models here.
 class Post(models.Model):
@@ -60,11 +61,16 @@ class Post(models.Model):
         unique_for_date='published',  # Slug is unique for publication date
     )
 
+    #  Each post can have multiple topics
     topics = models.ManyToManyField('Topic', blank=True)
 
     #  Sets default ordering for Post objects
     class Meta:
         ordering = ['-created']  # Posts sorted by date created, newest first
+
+    # Defines and returns appropriate URL for post
+    def get_absolute_url(self):
+        return reverse('post-detail', kwargs={'slug': self.slug})
 
     #  Post's title appears in list view rather than auto-generated string
     def __str__(self):
@@ -83,12 +89,17 @@ class Topic(models.Model):
         unique=True,
     )
 
+    #  URLs made readable for humans
     slug = models.SlugField(
         null=False,
         blank=False,
         unique=True,
-        help_text='A URL-safe version of the topic name',
+        help_text='A URL-friendly version of the topic name',
     )
+
+    #  Defines and returns appropriate URL for Topic
+    def get_absolute_url(self):
+        return reverse('topic-detail', kwargs={'slug': self.slug})
 
     #  Topic's name rather than auto-generated string displayed
     def __str__(self):

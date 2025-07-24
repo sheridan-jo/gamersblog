@@ -16,6 +16,15 @@ body {
     padding-top: 70px;
 }
 
+a {
+  text-decoration:none;
+  color: #fdf6e3;
+}
+
+a:hover {
+  font-weight: bold;
+}
+
 /* Makes flex container take up all available space,
 pushing other elements like footer to the bottom */
 .container {
@@ -69,5 +78,21 @@ p {
 .header .container {
   position: relative;
   z-index: 1;
+}
+
+/* Footer Section */
+
+#site-footer a {
+  color: #fdf6e3; /* matches your body text color */
+  text-decoration: none;
+}
+
+#site-footer a:hover {
+  color: #ffffff; /* optional: brighter on hover */
+  text-decoration: underline;
+}
+
+main {
+  flex: 1;
 }
 

@@ -1,0 +1,17 @@
+{% extends "blog/base.html" %}
+{# Page name is whatever the post's title is #}
+{% block page_title %}{{ object.title }}{% endblock %}
+
+{% block main %}
+<h1>{{ object.title }}</h1>
+<p>Published {{ object.published }}</p>
+<p>By <em>{{object.author.username }}</em></p>
+<p>
+    {# Topics for posts listed #}
+    {% for topic in object.topics.all %}
+    <a href="{{ topic.get_absolute_url }}">{{ topic.name }}</a> {# Link to topic pages #}
+    {% if not forloop.last %}, {% endif %} {# Prevents comma for last topic rendered #}
+    {% endfor %}
+</p>
+<p>{{ object.content }}</p>
+{% endblock %}
