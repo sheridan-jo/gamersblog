@@ -1,7 +1,8 @@
 from django.views.generic.base import TemplateView
 from django.shortcuts import render
-from django.views.generic import ListView
-from django.views.generic import DetailView
+from django.views.generic import DetailView, CreateView, ListView
+from django.contrib import messages
+from django.urls import reverse_lazy
 from . import models
 
 #  Home view
@@ -64,6 +65,25 @@ class PostDetailView(DetailView):
     def get_queryset(self):
         queryset = super().get_queryset().filter(status='published')
         return queryset
+
+#  Contact form view
+class ContactFormView(CreateView):
+    model = models.Contact
+    success_url = reverse_lazy('home')
+    fields = [
+        'first_name',
+        'last_name',
+        'email',
+        'message',
+    ]
+
+    def form_valid(self, form):
+        messages.add_message(
+            self.request,
+            messages.SUCCESS,
+            'Thank you! Your message has been sent.'
+        )
+        return super().form_valid(form)
 
 #  Terms and conditions view
 def terms_and_conditions(request):

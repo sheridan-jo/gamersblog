@@ -3,6 +3,25 @@ from django.conf import settings
 from django.urls import reverse
 
 #  Create your models here.
+
+class Contact(models.Model):
+    """
+    A contact form
+    """
+
+    first_name = models.CharField(max_length=50)  #  First name
+    last_name = models.CharField(max_length=50)  #  Last name
+    email = models.EmailField()  #  Email
+    message = models.TextField()  #  Message that user types
+    submitted = models.DateTimeField(auto_now_add=True)  #  Date and time submitted
+
+    class Meta:
+        ordering = ['-submitted']  #  Order from most to least recent
+
+    #  Returns date and time submitted, and email
+    def __str__(self):
+        return f'{self.submitted.date()}: {self.email}'
+
 class Post(models.Model):
     """
     Represents a blog post

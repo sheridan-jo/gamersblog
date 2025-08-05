@@ -2,6 +2,23 @@ from django.contrib import admin
 from . import models
 from .models import Comment
 
+#  ModelAdmin class for the Contact model
+@admin.register(models.Contact)
+class ContactAdmin(admin.ModelAdmin):
+    list_display = (
+        'email',
+        'last_name',
+        'first_name',
+        'submitted'
+    )
+    #  Fields are read-only in the admin panel
+    readonly_fields = (
+        'email',
+        'last_name',
+        'first_name',
+        'submitted'
+    )
+
 #  Inline admin model for the Comment model
 class CommentInline(admin.TabularInline):
     model = Comment  #  Shows comments related to a post in the Post's admin panel

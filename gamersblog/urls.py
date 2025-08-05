@@ -27,5 +27,6 @@ urlpatterns = [
     path('topics/', views.TopicListView.as_view(), name='topic-list'),  # For Topic ListView
     path('topics/<slug:slug>/', views.TopicDetailView.as_view(), name='topic-detail'), # Topic DetailView
     path("posts/<slug:slug>/", views.PostDetailView.as_view(), name='post-detail'),  # Post DetailView
-    path("posts/", views.PostListView.as_view(), name='post-list')  #  Post ListView
+    path("posts/", views.PostListView.as_view(), name='post-list'),  #  Post ListView
+    path('contact/', views.ContactFormView.as_view(), name='contact'),  # Contact form
 ]
