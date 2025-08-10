@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.views.generic import DetailView, CreateView, ListView
 from django.contrib import messages
 from django.urls import reverse_lazy
-from . import models
+from . import forms, models
 
 #  Home view
 class HomeView(TemplateView):
@@ -24,6 +24,10 @@ class HomeView(TemplateView):
 #  About view
 class AboutView(TemplateView):
     template_name = 'blog/about.html'
+
+#  Terms and conditions view
+def terms_and_conditions(request):
+    return render(request, 'blog/terms_and_conditions.html')
 
 # Topic ListView
 class TopicListView(ListView):
@@ -85,6 +89,23 @@ class ContactFormView(CreateView):
         )
         return super().form_valid(form)
 
-#  Terms and conditions view
-def terms_and_conditions(request):
-    return render(request, 'blog/terms_and_conditions.html')
+
+class PhotoSubmission(CreateView):
+    """
+    View for photo contest form
+    """
+    #  Shows photo contest form and saves submissions to the database
+
+    template_name = 'blog/photo_contest.html'  #  HTML file that displays the form
+    form_class = forms.PhotoContestForm  #  Fields from forms.py are shown
+    #  User returns to homepage when form is submitted successfully
+    success_url = reverse_lazy('home')
+
+    #  Shows message indicating that data was submitted successfully
+    def form_valid(self, form):
+        messages.add_message(
+            self.request,
+            messages.SUCCESS,
+            'Thank you! We have received your photo.'
+        )
+        return super().form_valid(form)

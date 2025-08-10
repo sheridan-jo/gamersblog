@@ -16,6 +16,14 @@
 </head>
 
 <body>
+    {% if messages %}
+    <div class="django-messages">
+        {% for message in messages %}
+            <div{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{message }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
     <!-- Navbar -->
     <nav class="navbar navbar-expand-md navbar-dark text-white fixed-top">
         <div class="container">
@@ -30,7 +38,7 @@
                     <li class="nav-item"><a class="nav-link text-white" href="{% url "post-list" %}">Posts</a></li>
                     <li class="nav-item"><a class="nav-link text-white" href="{% url "topic-list" %}">Topics</a></li>
                     <li class="nav-item"><a class="nav-link text-white" href="{% url "contact" %}">Contact</a></li>
-                    <li class="nav-item"><a class="nav-link text-white" href="#">Photo Contest</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="{% url "photo-contest" %}">Photo Contest</a></li>
                 </ul>
             </div>
         </div>
