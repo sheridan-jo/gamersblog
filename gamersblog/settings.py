@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
-import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,8 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-q^_dzz-+gt-*t2lnvlf#2mtl2_&(sui_e1c0o_94t-us_@=8_('
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# Read the DEBUG environment variable. Default to "1" for True.
-DEBUG = int(os.environ.get('DEBUG', '1'))
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -127,9 +125,3 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-#  Specifies path where media files will be served by webserver
-MEDIA_URL = '/media/'
-
-#  The path where uploaded files will be stored
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

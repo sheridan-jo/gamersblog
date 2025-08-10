@@ -18,8 +18,6 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from blog import views  #  Import the blog views
-from django.conf import settings
-from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -31,5 +29,4 @@ urlpatterns = [
     path("posts/<slug:slug>/", views.PostDetailView.as_view(), name='post-detail'),  # Post DetailView
     path("posts/", views.PostListView.as_view(), name='post-list'),  #  Post ListView
     path('contact/', views.ContactFormView.as_view(), name='contact'),  # Contact form
-    path('contest/', views.PhotoSubmission.as_view(), name='photo-contest')  #  Photo contest
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
