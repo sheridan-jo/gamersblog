@@ -1,23 +1,7 @@
 from django.contrib import admin
 from . import models
 from .models import Comment
-
-#  ModelAdmin class for the Contact model
-@admin.register(models.Contact)
-class ContactAdmin(admin.ModelAdmin):
-    list_display = (
-        'email',
-        'last_name',
-        'first_name',
-        'submitted'
-    )
-    #  Fields are read-only in the admin panel
-    readonly_fields = (
-        'email',
-        'last_name',
-        'first_name',
-        'submitted'
-    )
+from .models import PhotoContestEntry
 
 #  Inline admin model for the Comment model
 class CommentInline(admin.TabularInline):
@@ -75,6 +59,41 @@ class CommentAdmin(admin.ModelAdmin):
 
     #  Filters list by comments that are approved and not approved
     list_filter = ('approved',)
+
+#  ModelAdmin class for the Contact model
+@admin.register(models.Contact)
+class ContactAdmin(admin.ModelAdmin):
+    list_display = (
+        'email',
+        'last_name',
+        'first_name',
+        'submitted'
+    )
+    #  Fields are read-only in the admin panel
+    readonly_fields = (
+        'email',
+        'last_name',
+        'first_name',
+        'submitted'
+    )
+
+#  ModelAdmin for photo contest form
+@admin.register(PhotoContestEntry)
+class PhotoContestAdmin(admin.ModelAdmin):
+
+    #  Fields displayed in list view in admin panel
+    list_display = (
+        'first_name',
+        'last_name',
+        'email',
+        'submitted'
+    )
+
+    #  Staff can filter list of entries by date submitted
+    list_filter = ('submitted',)
+
+    #  Entries can be searched by first name, last name, or email
+    search_fields = ('first_name', 'last_name', 'email')
 
 #  Register the models
 admin.site.register(models.Post, PostAdmin)
