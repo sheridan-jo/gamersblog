@@ -76,7 +76,25 @@ class CommentAdmin(admin.ModelAdmin):
     #  Filters list by comments that are approved and not approved
     list_filter = ('approved',)
 
+#  ModelAdmin for photo contest form
+class PhotoContestAdmin(admin.ModelAdmin):
+
+    #  Fields displayed in list view in admin panel
+    list_display = (
+        'first_name',
+        'last_name',
+        'email',
+        'submitted'
+    )
+
+    #  Staff can filter list of entries by date submitted
+    list_filter = ('submitted',)
+
+    #  Entries can be searched by first name, last name, or email
+    search_fields = ('first_name', 'last_name', 'email')
+
 #  Register the models
 admin.site.register(models.Post, PostAdmin)
 admin.site.register(models.Topic, TopicAdmin)
 admin.site.register(models.Comment, CommentAdmin)
+admin.site.register(models.PhotoContestEntry, PhotoContestAdmin)

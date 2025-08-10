@@ -4,24 +4,6 @@ from django.urls import reverse
 
 #  Create your models here.
 
-class Contact(models.Model):
-    """
-    A contact form
-    """
-
-    first_name = models.CharField(max_length=50)  #  First name
-    last_name = models.CharField(max_length=50)  #  Last name
-    email = models.EmailField()  #  Email
-    message = models.TextField()  #  Message that user types
-    submitted = models.DateTimeField(auto_now_add=True)  #  Date and time submitted
-
-    class Meta:
-        ordering = ['-submitted']  #  Order from most to least recent
-
-    #  Returns date and time submitted, and email
-    def __str__(self):
-        return f'{self.submitted.date()}: {self.email}'
-
 class Post(models.Model):
     """
     Represents a blog post
@@ -171,3 +153,36 @@ class Comment(models.Model):
     #  Comment displayed rather than auto-generated string
     def __str__(self):
         return self.text[:30]  #  Returns first 30 characters
+
+class Contact(models.Model):
+    """
+    A contact form
+    """
+
+    first_name = models.CharField(max_length=50)  #  First name
+    last_name = models.CharField(max_length=50)  #  Last name
+    email = models.EmailField()  #  Email
+    message = models.TextField()  #  Message that user types
+    submitted = models.DateTimeField(auto_now_add=True)  #  Date and time submitted
+
+    class Meta:
+        ordering = ['-submitted']  #  Order from most to least recent
+
+    #  Returns date and time submitted, and email
+    def __str__(self):
+        return f'{self.submitted.date()}: {self.email}'
+
+class PhotoContestEntry(models.Model):
+    """
+    Form for photo submissions.
+    """
+
+    #  Outlines the fields for the database that handles photo
+    #  contest entries.
+
+    #  Fields for name, email, photo, date and time of submission
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    email = models.EmailField()
+    photo = models.ImageField()
+    submitted = models.DateTimeField(auto_now_add=True)

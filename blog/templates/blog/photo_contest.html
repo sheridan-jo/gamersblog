@@ -4,10 +4,10 @@
 
 {% block main %}
 <h1 class="my-5">Photo Contest</h1>
+<p>{% lorem %}</p>
 <form  enctype="multipart/form-data" method="post">
 {% csrf_token %}
 <table>
-{# Displays the form as a table #}
 {{ form.as_table }}
 </table>
 <button type="submit">Submit</button>
